@@ -6,13 +6,15 @@ class request:
     __URL = "https://avwx.rest/api/metar/"
 
 
-    def __setData(self,ICAO):
+    def __setData(self,ICAO,token):
         
+        
+
         aeroport = Aeroport()
-        a = requests.get(self.__URL + ICAO)
+        a = requests.get(self.__URL + ICAO + '?token=' + token)
         dictionar = a.json()
         aeroport.setICAO(ICAO)
-        if a.status_code == 200:
+        if a.status_code == 200 and len(token) != 0:
            
             if "temperature" in dictionar:
                 aeroport.setTemperature(dictionar["temperature"]["value"])
@@ -32,8 +34,9 @@ class request:
 
         
     def completezTotul(self):
+        token = input("Give me the AVWX token:")
         for i in range(0,self.__bazaDate.getLungimeListaAeroporturi()):
-            self.__setData(self.__bazaDate.getNumeAeroport(i))
+            self.__setData(self.__bazaDate.getNumeAeroport(i),token)
 
       
    

@@ -8,5 +8,7 @@ def main():
     for i in range(0,obj.getLungimeVarAeroporturi()):
         aeroport = obj.getAeroport(i)
         print(aeroport.getICAO(), " ", aeroport.getTemperature(), " ", aeroport.getWindGust())
+
+    a = input("Press Enter to quit")
    
 main()
